@@ -1,0 +1,11 @@
+node_modules/
+dist/
+bin/
+obj/
+*.zip
+*.tar
+admin.conf
+.kube/
+*secret.yaml
+.env
+seed_clientes_emails.sql

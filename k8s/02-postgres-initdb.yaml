@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-initdb
+  namespace: sistema-emails
+data:
+  init.sql: |
+    CREATE TABLE IF NOT EXISTS cliente (
+        cliente_id bigint GENERATED ALWAYS AS IDENTITY,
+        nome       varchar(150) NOT NULL,
+        CONSTRAINT cliente_pkey PRIMARY KEY (cliente_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS emails (
+        email_id   bigint GENERATED ALWAYS AS IDENTITY,
+        cliente_id bigint NOT NULL,
+        nome       varchar(150) NOT NULL,
+        email      varchar(255) NOT NULL,
+        CONSTRAINT emails_pkey PRIMARY KEY (email_id),
+        CONSTRAINT emails_email_key UNIQUE (email),
+        CONSTRAINT fk_emails_cliente FOREIGN KEY (cliente_id)
+            REFERENCES cliente (cliente_id)
+    );
+
+    CREATE INDEX IF NOT EXISTS ix_emails_cliente_id ON emails (cliente_id);

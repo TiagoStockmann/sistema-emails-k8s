@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: sistema-emails-frontend:1.0
+          image: sistema-emails-frontend:1.2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
